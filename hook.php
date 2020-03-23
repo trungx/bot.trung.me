@@ -12,8 +12,8 @@
 require_once __DIR__ . '/vendor/autoload.php';
 
 // Add you bot's API key and name
-$bot_api_key  = 'your:bot_api_key';
-$bot_username = 'username_bot';
+$bot_api_key  = '839093492:AAFYnI2XjbjwAopQ2hqMchZlxw5F_UkUyxo';
+$bot_username = 'daikabot';
 
 // Define all IDs of admin users in this array (leave as empty array if not used)
 $admin_users = [
@@ -26,12 +26,12 @@ $commands_paths = [
 ];
 
 // Enter your MySQL database credentials
-//$mysql_credentials = [
-//    'host'     => 'localhost',
-//    'user'     => 'dbuser',
-//    'password' => 'dbpass',
-//    'database' => 'dbname',
-//];
+$mysql_credentials = [
+   'host'     => 'localhost',
+   'user'     => 'root',
+   'password' => 'passworddefault',
+   'database' => 'telebot',
+];
 
 try {
     // Create Telegram API object
@@ -44,24 +44,26 @@ try {
     $telegram->enableAdmins($admin_users);
 
     // Enable MySQL
-    //$telegram->enableMySql($mysql_credentials);
+    $telegram->enableMySql($mysql_credentials);
 
     // Logging (Error, Debug and Raw Updates)
-    //Longman\TelegramBot\TelegramLog::initErrorLog(__DIR__ . "/{$bot_username}_error.log");
-    //Longman\TelegramBot\TelegramLog::initDebugLog(__DIR__ . "/{$bot_username}_debug.log");
-    //Longman\TelegramBot\TelegramLog::initUpdateLog(__DIR__ . "/{$bot_username}_update.log");
+    Longman\TelegramBot\TelegramLog::initErrorLog(__DIR__ . "/{$bot_username}_error.log");
+    Longman\TelegramBot\TelegramLog::initDebugLog(__DIR__ . "/{$bot_username}_debug.log");
+    Longman\TelegramBot\TelegramLog::initUpdateLog(__DIR__ . "/{$bot_username}_update.log");
 
     // If you are using a custom Monolog instance for logging, use this instead of the above
     //Longman\TelegramBot\TelegramLog::initialize($your_external_monolog_instance);
 
     // Set custom Upload and Download paths
-    //$telegram->setDownloadPath(__DIR__ . '/Download');
-    //$telegram->setUploadPath(__DIR__ . '/Upload');
+    $telegram->setDownloadPath(__DIR__ . '/Download');
+    $telegram->setUploadPath(__DIR__ . '/Upload');
 
     // Here you can set some command specific parameters
     // e.g. Google geocode/timezone api key for /date command
-    //$telegram->setCommandConfig('date', ['google_api_key' => 'your_google_api_key_here']);
+    $telegram->setCommandConfig('date', ['google_api_key' => 'AIzaSyCzEPHHLr4Jb4d1xaFLFMxZxA7n-_G3xDM']);
 
+    // OpenWeatherMap API key for /weather command
+    $telegram->setCommandConfig('weather', ['owm_api_key' => 'b1b15e88fa797225412429c1c50c122a1',]);
     // Botan.io integration
     //$telegram->enableBotan('your_botan_token');
 

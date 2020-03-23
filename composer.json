@@ -17,6 +17,7 @@
         }
     ],
     "require": {
-        "longman/telegram-bot": "*"
+        "longman/telegram-bot": "*",
+        "nesbot/carbon": "^2.28"
     }
 }
